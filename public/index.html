@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>幾時可以啪啪啪？</title>
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <input type="text" id="room-id"/><button id="m-create">M Create</button>
+    <button id="f-create">F Create</button>
+
+    <button id="join">Join</button>
+
+    <input type="tel" class="male" id="m-mark" style="display:none" placeholder="男方分數"/>
+    <input type="tel" class="male" id="m-prop" style="display:none" placeholder="男方資產"/>
+    <input type="tel" class="female" id="f-age" style="display:none" placeholder="女方年齡"/>
+    <input type="tel" class="female" id="f-mark" style="display:none" placeholder="女方分數"/>
+    <input type="tel" class="female" id="f-exp" style="display:none" placeholder="女方經驗"/>
+
+    <button id="ready">Ready</button>
+
+    <h3 id="partner-ready-notice"></h3>
+    <h3>PaakPaakDay = <span id="pppd"></span></h3>
+
+
+
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
