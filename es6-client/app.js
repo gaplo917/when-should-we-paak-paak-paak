@@ -53,7 +53,7 @@ $('#join').click(() => {
 
     if(apiResult === RESULTS.JOINED && user.state === USER_STATE.INIT) {
 
-      $('#log').append("Joined the room") 
+      $('#log').append("<div>Joined the room</div>") 
 
       // save the token
       user.token = token
@@ -123,7 +123,7 @@ function createRoom(roomName,sex) {
 
       if(apiResult === RESULTS.CREATED) {
 
-        $('#log').append("Room created! Please wait other to come in!")
+        $('#log').append("<div>Room created! Please wait other to come in!</div>")
 
         // save the token
         user.token = token
@@ -141,7 +141,7 @@ function createRoom(roomName,sex) {
 
           switch (wsResp.result) {
             case RESULTS.JOINED:
-              $('#log').append("Partner has joined the room") 
+              $('#log').append("<div>Partner has joined the room</div>") 
 
               user.state = USER_STATE.PLAYING
 
