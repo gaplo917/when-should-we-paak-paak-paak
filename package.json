@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel es6-client/app.js -d public"
+    "build": "./node_modules/.bin/babel es6-client/*  -o public/app.js"
   },
   "author": "Gap撈Tech",
   "license": "ISC",
