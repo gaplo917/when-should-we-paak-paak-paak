@@ -1,12 +1,13 @@
 {
   "name": "when-should-we-paak-paak-paak",
   "version": "1.0.0",
-  "description": "",
+  "description": "Playing When should we paak paak paak formula real-time",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Gap撈Tech",
   "license": "ISC",
   "dependencies": {
     "express": "^4.10.2",
