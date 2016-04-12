@@ -11,6 +11,8 @@ var memcachedAddr = process.env.MEMCACHE_PORT_11211_TCP_ADDR || 'localhost';
 var memcachedPort = process.env.MEMCACHE_PORT_11211_TCP_PORT || '11211';
 var memcached = new Memcached(memcachedAddr + ':' + memcachedPort);
 
+const PORT = process.env.PORT || 8080
+
 const RESULTS = {
   CREATED:1,
   JOINED: 2,
@@ -128,6 +130,6 @@ io.on('connection', (socket) => {
 
 })
 
-http.listen(8080, function(){
-  console.log('listening on *:8080');
+http.listen(PORT, function(){
+  console.log(`listening on *:${PORT}`);
 });
