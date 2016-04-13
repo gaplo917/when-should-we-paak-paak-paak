@@ -1,32 +1,96 @@
 <!doctype html>
 <html>
   <head>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="幾時可以啪啪啪？">
+    <meta name="author" content="Gap撈Tech">
+    <style>
+        .spinner {
+      margin: 100px auto;
+      width: 40px;
+      height: 40px;
+      position: relative;
+      text-align: center;
+      
+      -webkit-animation: sk-rotate 2.0s infinite linear;
+      animation: sk-rotate 2.0s infinite linear;
+    }
+
+    .dot1, .dot2 {
+      width: 60%;
+      height: 60%;
+      display: inline-block;
+      position: absolute;
+      top: 0;
+      background-color: #333;
+      border-radius: 100%;
+      
+      -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+      animation: sk-bounce 2.0s infinite ease-in-out;
+    }
+
+    .dot2 {
+      top: auto;
+      bottom: 0;
+      -webkit-animation-delay: -1.0s;
+      animation-delay: -1.0s;
+    }
+
+    @-webkit-keyframes sk-rotate { 100% { -webkit-transform: rotate(360deg) }}
+    @keyframes sk-rotate { 100% { transform: rotate(360deg); -webkit-transform: rotate(360deg) }}
+
+    @-webkit-keyframes sk-bounce {
+      0%, 100% { -webkit-transform: scale(0.0) }
+      50% { -webkit-transform: scale(1.0) }
+    }
+
+    @keyframes sk-bounce {
+      0%, 100% { 
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+      } 50% { 
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+      }
+    }
+    </style>
     <title>幾時可以啪啪啪？</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   </head>
   <body>
-    <ul id="messages"></ul>
-    <input type="text" id="room-id"/><button id="m-create">M Create</button>
-    <button id="f-create">F Create</button>
+    <div class="container">
+        <input type="text" id="room-id"/>
+        <button type="button" class="btn btn-primary" id="m-create">M Create</button>
+        <button type="button" class="btn btn-warning" id="f-create">F Create</button>
 
-    <button id="join">Join</button>
+        <div class="spinner">
+          <div class="dot1"></div>
+          <div class="dot2"></div>
+        </div>
+        
+        <button id="join">Join</button>
 
-    <input type="tel" class="male" id="m-mark" style="display:none" placeholder="男方分數"/>
-    <input type="tel" class="male" id="m-prop" style="display:none" placeholder="男方資產"/>
-    <input type="tel" class="female" id="f-age" style="display:none" placeholder="女方年齡"/>
-    <input type="tel" class="female" id="f-mark" style="display:none" placeholder="女方分數"/>
-    <input type="tel" class="female" id="f-exp" style="display:none" placeholder="女方經驗"/>
+        <input type="tel" class="male" id="m-mark" style="display:none" placeholder="男方分數"/>
+        <input type="tel" class="male" id="m-prop" style="display:none" placeholder="男方資產"/>
+        <input type="tel" class="female" id="f-age" style="display:none" placeholder="女方年齡"/>
+        <input type="tel" class="female" id="f-mark" style="display:none" placeholder="女方分數"/>
+        <input type="tel" class="female" id="f-exp" style="display:none" placeholder="女方經驗"/>
 
-    <button id="ready">Ready</button>
+        <button id="ready">Ready</button>
 
-    <h3 id="partner-ready-notice"></h3>
-    <h3>PaakPaakDay = <span id="pppd"></span></h3>
-    
-    <div id="log"></div>
+        <h3 id="partner-ready-notice"></h3>
+        <h3>PaakPaakDay = <span id="pppd"></span></h3>
 
+        <div id="log"></div>
 
+    </div>
 
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

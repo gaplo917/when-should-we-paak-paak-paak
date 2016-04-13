@@ -115,7 +115,9 @@ io.on('connection', (socket) => {
           // Calculate the result
 
           console.log(kv)
-          const paakpaakDay = (Math.pow(40 - kv.fAge,2) + Math.pow(kv.fMark,3) * 10) / ((Math.pow(kv.mMark,2) + kv.mProp) * Math.pow(kv.fExp + 1,2))
+          const dividend = (Math.pow(40 - kv.fAge,2) + Math.pow(kv.fMark,3) * 10)
+          const divisor = ((Math.pow(kv.mMark,2) + kv.mProp) * Math.pow(kv.fExp + 1,2))
+          const paakpaakDay =  divisor == 0 ? "infinity" : dividend / divisor 
 
           io.emit(`rooms/${token}`, JSON.stringify({
             paakpaakDay: paakpaakDay,
@@ -133,3 +135,8 @@ io.on('connection', (socket) => {
 http.listen(PORT, function(){
   console.log(`listening on *:${PORT}`);
 });
+
+
+setInterval(() => {
+  console.log("clientsCount",io.engine.clientsCount)
+},1000)

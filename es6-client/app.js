@@ -1,4 +1,3 @@
-var socket = io();
 
 const USER_STATE = {
   INIT: 0,
@@ -19,29 +18,30 @@ const RESULTS = {
 var user = {
   state: USER_STATE.INIT,
   token: undefined,
-  sex: undefined
+  sex: undefined,
+  socket: undefined
 }
+$(function(){
 
+  $('#m-create').click(() => {
+    const roomName = $('#room-id').val();
+    if(user.state == USER_STATE.INIT) {
+      createRoom(roomName,'M')
+    } else {
+      alert("You are in a room already")
+    }
 
-$('#m-create').click(() => {
-  const roomName = $('#room-id').val();
-  if(user.state == USER_STATE.INIT) {
-    createRoom(roomName,'M')
-  } else {
-    alert("You are in a room already")
-  }
+  })
 
-})
+  $('#f-create').click(() => {
+    const roomName = $('#room-id').val();
+    if(user.state == USER_STATE.INIT) {
+      createRoom(roomName,'F')
+    } else {
+      alert("You are in a room already")
+    }
 
-$('#f-create').click(() => {
-  const roomName = $('#room-id').val();
-  if(user.state == USER_STATE.INIT) {
-    createRoom(roomName,'F')
-  } else {
-    alert("You are in a room already")
-  }
-
-})
+  })
 
 $('#join').click(() => {
 
@@ -63,10 +63,13 @@ $('#join').click(() => {
       // change state to PLAYING
       user.state = USER_STATE.PLAYING
 
+      // create socket connection
+      user.socket = io()
+
       showInputBySex(user.sex)
 
       // subscribe the rooms
-      socket.on(`rooms/${token}`, (jsonStr) => {
+      user.socket.on(`rooms/${token}`, (jsonStr) => {
         const wsResp = JSON.parse(jsonStr)
         console.log(wsResp)
 
@@ -89,7 +92,7 @@ $('#join').click(() => {
 
 $('#ready').click(() => {
   if(user.state === USER_STATE.PLAYING && user.sex){
-    socket.emit(`rooms`,JSON.stringify({
+    user.socket.emit(`rooms`,JSON.stringify({
       sex: user.sex,
       m: {
         mark: $('#m-mark').val(),
@@ -107,6 +110,9 @@ $('#ready').click(() => {
   }
 
 })
+
+})
+
 
 function oppositeSex(sex) {
   return sex === 'M'? 'F' : 'M'
@@ -133,8 +139,11 @@ function createRoom(roomName,sex) {
         // change state to WAITING
         user.state = USER_STATE.WAITING
 
+        // create socket connection
+        user.socket = io()
+
         // subscribe the rooms
-        socket.on(`rooms/${token}`, (jsonStr) => {
+        user.socket.on(`rooms/${token}`, (jsonStr) => {
           const wsResp = JSON.parse(jsonStr)
 
           console.log(wsResp)
